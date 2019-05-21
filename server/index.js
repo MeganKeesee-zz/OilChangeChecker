@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const Users = require('./db/schema.js')
 
 const app = express()
   .use(cors());
