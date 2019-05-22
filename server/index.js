@@ -64,21 +64,44 @@ app.get('/vehicle', (req, res) => {
     .then((odometer) => {
       console.log(odometer);
       res.json(odometer);
+      res.send(odometer);
     });
 });
 
-app.get('/home', (req, res) => {
+app.get('/user/:userID', (req, res) => {
   // TODO: request user info from mongo
-
-  //TODO: send data to app
+  Users.findOne({user: req.params.userID}, (err, user) => {
+    if (err) {
+      res.status(404).send(err)
+    } else {
+      console.log(user);
+      res.status(200).send(user);
+    }
+  });
 });
 
-app.post('/home', (req, res) => {
-  // TODO: send user info to the database
+app.post('/user/:userID', (req, res) => {
+  // TODO: add a new user to mongo
+  Users.create(req.body, (err, user) => {
+    if(err) {
+      res.status(400).send(err);
+    } else {
+      res.sendStatus(201);
+    }
+  });
 }); 
 
-app.patch('/home', (req, res) => {
-  // TODO: update user info in the database
-})
+app.put('/user/:userID/update', (req, res) => {
+  // TODO: update an existing user in mongo
+  let query = {user: req.params.userID};
+  console.log(req.body);
+  Users.findOneAndUpdate(query, req.body, (err, user) => {
+    if (err) {
+      res.status(400).send(err);
+    } else {
+      res.sendStatus(201);
+    }
+  });
+});
 
 app.listen(port, () => console.log('listening on: ', port));
