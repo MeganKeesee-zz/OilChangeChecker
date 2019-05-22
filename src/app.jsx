@@ -12,12 +12,22 @@ class App extends React.Component {
       suggestedInterval: 5000,
       currentOdometerReading: 0,
     }
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(e, state) {
+    e.preventDefault();
+    this.setState({
+      dateOfLastOC: state.dateOfLastOC,
+      prevOdometerReading: state.prevOdometerReading,
+      suggestedInterval: state.suggestedInterval
+    })
   }
 
   render() {
     return (
     <div>
-      <Form />
+      <Form handleSubmit={this.handleSubmit}/>
     </div>
     )
   }

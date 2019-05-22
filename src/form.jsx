@@ -6,9 +6,9 @@ class Form extends React.Component {
     this.state = {
       dateOfLastOC: '',
       unknownDate: false,
-      prevOdometerReading: '',
+      prevOdometerReading: 0,
       unknownPrevOdometerReading: false,
-      suggestedInterval: '',
+      suggestedInterval: 5000,
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -33,7 +33,7 @@ class Form extends React.Component {
 
   render() {
     return (
-      <form>
+      <form onSubmit={e => this.props.handleSubmit(e, this.state)}>
         when was the last time you got an oil change? <input type="date" name="dateOfLastOC" value={this.state.dateOfLastOC} onChange={this.handleChange}></input> <br />
         <input type="checkbox" name="unknownDate" checked={this.state.unknownDate} onChange={this.handleCheckbox}/>I don't know <br />
         what was the mileage on your odometer the last time you got an oil change? <input type="text" name="prevOdometerReading" value={this.state.prevOdometerReading} placeholder="0" onChange={this.handleChange}></input> <br />
