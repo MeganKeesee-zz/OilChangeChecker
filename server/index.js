@@ -104,4 +104,14 @@ app.put('/user/:userID/update', (req, res) => {
   });
 });
 
+app.delete('/user/:userID', (req, res) => {
+  Users.findOneAndDelete({user: req.params.userID}, (err, user) => {
+    if (err) {
+      res.send('User record was not deleted:' + err)
+    } else {
+      console.log('User record deleted');
+    }
+  })
+})
+
 app.listen(port, () => console.log('listening on: ', port));
