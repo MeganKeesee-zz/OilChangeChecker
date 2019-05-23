@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const Users = require('./db/schema.js')
 const smartcar = require('smartcar');
+const path = require('path');
 
 const app = express()
   .use(cors());
@@ -13,7 +14,7 @@ const port = 8000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true }));
 
-app.use(express.static('public'));
+app.use('/', express.static(path.join(__dirname, '../public')));
 
 // TODO: Authorization Step 1a: Launch Smartcar authentication dialog
 const client = new smartcar.AuthClient({
