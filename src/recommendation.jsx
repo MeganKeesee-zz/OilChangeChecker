@@ -1,15 +1,29 @@
-import React from 'react';
+import React from "react";
 
-const Recommendation = (props) => {
-  if (props.currentOdometerReading - props.prevOdometerReading < props.suggestedInterval) {
-    return(
-      <div className="resp">Nah, you're good  💁🏻‍ You'll need an oil change in {props.suggestedInterval - (props.currentOdometerReading - props.prevOdometerReading)} miles</div>
-    )
+const Recommendation = props => {
+  if (
+    props.currentOdometerReading - props.prevOdometerReading <
+    props.suggestedInterval
+  ) {
+    return (
+      <div className="resp">
+        Nah, you're good 💁🏻‍ You'll need an oil change in{" "}
+        {props.suggestedInterval -
+          (props.currentOdometerReading - props.prevOdometerReading)}{" "}
+        miles
+      </div>
+    );
   } else {
     return (
-      <div className="resp">Yep, it's time for an oil change 👩🏻‍🔧 You're {(props.currentOdometerReading - props.prevOdometerReading) - props.suggestedInterval} over the recommended mileage</div>
-    )
+      <div className="resp">
+        Yep, it's time for an oil change 👩🏻‍🔧 You're{" "}
+        {props.currentOdometerReading -
+          props.prevOdometerReading -
+          props.suggestedInterval}{" "}
+        over the recommended mileage
+      </div>
+    );
   }
-}
+};
 
 export default Recommendation;
