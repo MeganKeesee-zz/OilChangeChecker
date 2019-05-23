@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import Form from './form.jsx';
 import Recommendation from './recommendation.jsx'
 
@@ -10,11 +11,16 @@ class App extends React.Component {
       formSubmitted: false,
       userID: 0,
       dateOfLastOC: '',
-      prevOdometerReading: 1000,
+      prevOdometerReading: 0,
       suggestedInterval: 5000,
-      currentOdometerReading: 2000,
+      currentOdometerReading: 0,
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getOdometer = this.getOdometer.bind(this);
+  }
+
+  componentDidMount() {
+    this.getOdometer();
   }
 
   handleSubmit(e, state) {
@@ -29,9 +35,9 @@ class App extends React.Component {
 
   getOdometer() {
     axios.get('/vehicle')
-    .then(res => res.data)
-    .then(data => data.json())
+    .then(res => res.data.data)
     .then(data => {
+      console.log(data.distance)
       this.setState({
         currentOdometerReading: data.distance
       })

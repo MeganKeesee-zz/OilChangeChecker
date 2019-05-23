@@ -43,8 +43,7 @@ app.get('/exchange', (req, res) => {
   .then((_access) => {    
     // in a production app you'll want to store this in some kind of persistent storage
     access = _access;
-
-    res.sendStatus(200);
+    res.redirect('/');
   });
 });
 
@@ -64,7 +63,6 @@ app.get('/vehicle', (req, res) => {
     })
     .then((odometer) => {
       console.log(odometer);
-      res.json(odometer);
       res.send(odometer);
     });
 });
