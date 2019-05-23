@@ -62,7 +62,6 @@ app.get('/vehicle', (req, res) => {
       return vehicle.odometer();
     })
     .then((odometer) => {
-      console.log(odometer);
       res.send(odometer);
     });
 });
